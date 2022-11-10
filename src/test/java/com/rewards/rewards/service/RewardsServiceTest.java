@@ -18,6 +18,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 @RunWith(SpringRunner.class)
@@ -35,6 +36,20 @@ public class RewardsServiceTest {
 
   @Test
   public void calculatesTheCorrectPoints() {
+    Customer customer = createCustomer();
+
+    Mockito.when(customerRepository.
+        findCustomerWithLastThreeMonthsOfTransactions("123e4567-e89b-12d3-a456-426655440000")
+    ).thenReturn(customer);
+
+    CustomerRewardsDto customerRewardsDto = rewardsService.
+        getRewardsForCustomer("123e4567-e89b-12d3-a456-426655440000");
+
+    // TODO: fix workaround as int comparison is something that I was unable to find for some reason
+    Assert.assertEquals(customerRewardsDto.getTotal_rewards().toString(), "140");
+  }
+
+  private Customer createCustomer() {
     Customer customer = new Customer();
     customer.setId(1);
     customer.setName("Artemis");
@@ -42,22 +57,22 @@ public class RewardsServiceTest {
     customer.setTransactions(new ArrayList<>());
 
     Transaction transactionWithTotalFifty = new Transaction();
-    transactionWithTotalFifty.setDate(new GregorianCalendar(2022,11,1));
+    transactionWithTotalFifty.setDate(new GregorianCalendar(2022, Calendar.OCTOBER,1));
     transactionWithTotalFifty.setVendor("walmart");
     transactionWithTotalFifty.setTotal(50.00);
 
     Transaction transactionWithTotalHundred = new Transaction();
-    transactionWithTotalHundred.setDate(new GregorianCalendar(2022,11,1));
+    transactionWithTotalHundred.setDate(new GregorianCalendar(2022,Calendar.OCTOBER,1));
     transactionWithTotalHundred.setVendor("walmart");
     transactionWithTotalHundred.setTotal(100.00);
 
     Transaction transactionWithTotalOneTwenty = new Transaction();
-    transactionWithTotalOneTwenty.setDate(new GregorianCalendar(2022,11,1));
+    transactionWithTotalOneTwenty.setDate(new GregorianCalendar(2022,Calendar.OCTOBER,1));
     transactionWithTotalOneTwenty.setVendor("walmart");
     transactionWithTotalOneTwenty.setTotal(120.00);
 
     Transaction transactionWithTotalFortyNine = new Transaction();
-    transactionWithTotalFortyNine.setDate(new GregorianCalendar(2022,11,1));
+    transactionWithTotalFortyNine.setDate(new GregorianCalendar(2022,Calendar.OCTOBER,1));
     transactionWithTotalFortyNine.setVendor("walmart");
     transactionWithTotalFortyNine.setTotal(49.00);
 
@@ -65,15 +80,6 @@ public class RewardsServiceTest {
     customer.getTransactions().add(transactionWithTotalHundred);
     customer.getTransactions().add(transactionWithTotalOneTwenty);
     customer.getTransactions().add(transactionWithTotalFortyNine);
-
-    Mockito.when(customerRepository.
-        findCustomerWithLastThreeMonthsOfTransactions("123e4567-e89b-12d3-a456-426655440000")
-    ).thenReturn(customer);
-
-    CustomerRepository customerRepoFromContext = context.getBean(CustomerRepository.class);
-
-    CustomerRewardsDto customerRewardsDto = rewardsService.getRewardsForCustomer("123e4567-e89b-12d3-a456-426655440000");
-
-    Assert.assertEquals(customerRewardsDto.getTotal_rewards().toString(), "140");
+    return customer;
   }
 }

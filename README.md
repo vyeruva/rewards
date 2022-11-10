@@ -83,3 +83,9 @@ The Query to fetch the transactions goes back 90 days from the current date and 
 the date and time today is 11-09-2022 at 9:00 PM EST. The query picks all transactions which are created on or after 08-09-2022 at 9:00 PM.
 I am not sure if this fits the requirements correctly. Does the requirement mean that we need to return all transactions in the month of 
 August, September, October and November or is going back 90 days fine? Need to clarify the requirements and make changes as necessary.
+
+Add pipelines
+
+Add linting libraries
+
+Setup husky for running linting and unit testing before commits

@@ -1,6 +1,7 @@
 package com.rewards.rewards.controller;
 
 import com.rewards.rewards.dto.CustomerRewardsDto;
+import com.rewards.rewards.exception.ResourceNotFoundException;
 import com.rewards.rewards.service.RewardsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,9 @@ public class RewardsController {
 
   @GetMapping("/{id}")
   public @ResponseBody CustomerRewardsDto getRewardsForCustomer(@PathVariable String id) {
-    return rewardsService.getRewardsForCustomer(id);
+    CustomerRewardsDto customerRewardsDto = rewardsService.getRewardsForCustomer(id);
+    if(customerRewardsDto == null) throw new ResourceNotFoundException();
+    return customerRewardsDto;
   }
 
   @GetMapping("")

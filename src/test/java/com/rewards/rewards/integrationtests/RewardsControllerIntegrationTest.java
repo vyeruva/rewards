@@ -1,17 +1,13 @@
 package com.rewards.rewards.integrationtests;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
 import java.util.ArrayList;
 
 @SpringBootTest
@@ -36,7 +32,7 @@ public class RewardsControllerIntegrationTest {
         andExpect(status().isOk()).
         andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Athena")).
         andExpect(MockMvcResultMatchers.jsonPath("$.id").value("4a15ea99-40ba-47da-8714-a76dba7e85d3")).
-        andExpect(MockMvcResultMatchers.jsonPath("$.totalRewards").value(1624)).
+        andExpect(MockMvcResultMatchers.jsonPath("$.total_rewards").value(1624)).
         andExpect(MockMvcResultMatchers.jsonPath("$.rewards[*].rewards").value(rewardsPerMonth));
   }
 
@@ -52,9 +48,11 @@ public class RewardsControllerIntegrationTest {
         perform(get("/rewards")).
         andDo(print()).
         andExpect(status().isOk()).
-        andExpect(MockMvcResultMatchers.jsonPath("$.[*].totalRewards").value(totalRewardsForCustomer));
+        andExpect(MockMvcResultMatchers.jsonPath("$.[*].total_rewards").value(totalRewardsForCustomer));
   }
 
-  // TO-DO: Add tests for month and years which are not brittle.
+  // TODO: Add tests for month and years which are not brittle.
+  // TODO: Add negative tests
+  // TODO: Add tests for scenarios 404 scenario
   // Business logic involved in calculating expectations is necessary.
 }

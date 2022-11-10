@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
-  // join fetch is specifically used to avoid n+1 queries during fetch
+  // join fetch is used to avoid n+1 queries during fetch
   @Query("SELECT DISTINCT customer FROM Customer customer " +
       "JOIN FETCH customer.transactions transactions " +
       "WHERE transactions.date >= DATEADD(DAY, -90, LOCALTIMESTAMP(3)) "+

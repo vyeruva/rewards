@@ -25,12 +25,13 @@ public class RewardsService {
         List<Customer> customers = customerRepository.findAllCustomersWithLastThreeMonthsOfTransactions();
 
         List<CustomerRewardsDto> customerRewardsDtoList = new ArrayList<>();
-        customers.stream().map(customer -> mapToCustomerDto(customer)).collect(Collectors.toCollection(() -> customerRewardsDtoList));
+        customers.stream().map(this::mapToCustomerDto).collect(Collectors.toCollection(() -> customerRewardsDtoList));
 
         return customerRewardsDtoList;
     }
 
     private CustomerRewardsDto mapToCustomerDto(Customer customer) {
+        if(customer == null) return null;
         CustomerRewardsDto customerRewardsDto = new CustomerRewardsDto();
         customerRewardsDto.setName(customer.getName());
         customerRewardsDto.setId(customer.getUuid());
