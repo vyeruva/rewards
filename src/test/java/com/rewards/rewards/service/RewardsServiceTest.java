@@ -1,10 +1,9 @@
-package com.rewards.rewards.servuce;
+package com.rewards.rewards.service;
 
 import com.rewards.rewards.dto.CustomerRewardsDto;
 import com.rewards.rewards.entity.Customer;
 import com.rewards.rewards.entity.Transaction;
 import com.rewards.rewards.repository.CustomerRepository;
-import com.rewards.rewards.service.RewardsService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
