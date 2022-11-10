@@ -28,7 +28,7 @@ public class CustomerRewardsDto {
         return total_rewards;
     }
 
-    // do not like this message naming at all but don't want to expose camel cased vars to the outside world
+    // do not like this function naming at all but don't want to expose camel cased vars to the outside world
     public void setTotal_rewards(Integer total_rewards) {
         this.total_rewards = total_rewards;
     }
