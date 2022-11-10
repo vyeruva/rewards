@@ -73,6 +73,10 @@ GET /rewards/id
 Q: Is the month zero indexed vs one indexed <br/>
 A: One indexed. 1 = January and 12 = December
 
+## Assumptions
+Points can never be fractional. If this is not the requirement, then should be fairly easy to change the code to 
+accommodate this by changing int to float. The limitation with int based logic is documented below.
+
 ## Limitations
 
 Currently, the max of total points that the app can reasonably process is less than 2147483647 (Integer.MAX_VALUE). 
