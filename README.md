@@ -89,3 +89,5 @@ Add pipelines
 Add linting libraries
 
 Setup husky for running linting and unit testing before commits
+
+Add Lombok to remove getter setter clutter
