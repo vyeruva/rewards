@@ -79,8 +79,9 @@ accommodate this by changing int to float. The limitation with int based logic i
 
 ## Limitations
 
-Currently, the max of total points that the app can reasonably process is less than 2147483647 (Integer.MAX_VALUE). 
-This is because the points are calculated using integers. Can be changed to BigInteger to fix this limitation.
+Currently, the max of total points that the app can reasonably process is less than 2,147,483,647 (Integer.MAX_VALUE).
+I am assuming that in the real world, 2 billion points over 3 months for a customer is a pretty good upper bound. 
+If not, can easily change it to big integer. Note that all point calculations are currently done using integers.
 
 ## Tech Debt
 The Query to fetch the transactions goes back 90 days from the current date and time. For example, 
