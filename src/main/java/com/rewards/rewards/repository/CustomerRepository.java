@@ -11,6 +11,7 @@ import java.util.List;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
+  // Does this query work across a variety of DBs? Is Localtimestamp a good traveller across DBs?
   // join fetch is used to avoid n+1 queries during fetch
   @Query("SELECT DISTINCT customer FROM Customer customer " +
       "JOIN FETCH customer.transactions transactions " +
