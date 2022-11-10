@@ -5,8 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(indexes = @Index(columnList = "uuid"))
+@Table(indexes = @Index(columnList = "uuid")) // as uuid is used for lookups
 public class Customer {
+    // care is taken to never expose this to the customer.
+    // Rather the UUID is the key used for customer lookups in the API
+    // This is for internal use only
+    // An argument can be made to remove this  id and use uuid as PK, but I am not very comfortable exposing DB
+    // PKs to the customer
     @Id
     private Integer id;
 
